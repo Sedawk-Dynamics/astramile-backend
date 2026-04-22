@@ -297,6 +297,92 @@ const NEWS = [
   { slug: "gaganyaan-crew-selection", title: "India's Gaganyaan Crew Selection Complete", category: "Crewed", excerpt: "ISRO announced the final crew of four astronauts for India's first crewed space mission, launching in 2027.", body: "The crew has begun advanced training, including centrifuge runs and pressurised-suit operations.", coverImage: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1200&q=80", publishedAt: new Date("2026-01-12") },
 ];
 
+const BLOG: Array<{
+  slug: string;
+  title: string;
+  category: string;
+  excerpt: string;
+  body: string;
+  coverImage: string | null;
+  videoUrl: string | null;
+  author: string;
+  tags: string[];
+  publishedAt: Date;
+}> = [
+  {
+    slug: "inside-starship-factory-tour",
+    title: "Inside the Starship Factory: A Video Tour",
+    category: "Video",
+    excerpt: "A walkthrough of the Boca Chica production line where the next generation of reusable spacecraft is being built.",
+    body: "Join us for a behind-the-scenes tour of the Starship production facility. From the Raptor engine assembly to the final stacking, every step reveals the engineering ambition behind the vehicle that aims to carry humanity to Mars.",
+    coverImage: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=1200&q=80",
+    videoUrl: "https://www.youtube.com/watch?v=aBr2kKAHN6M",
+    author: "AstraMile Team",
+    tags: ["video", "factory", "starship"],
+    publishedAt: new Date("2026-04-10"),
+  },
+  {
+    slug: "what-methane-engines-mean-for-mars",
+    title: "What Methane Engines Really Mean for Mars",
+    category: "Engineering",
+    excerpt: "Why liquid methane is the fuel of the future — and how we plan to make it on Mars.",
+    body: "Methane combustion produces a cleaner burn than RP-1 kerosene, and more critically, methane can be synthesized from Martian atmospheric CO2 using the Sabatier reaction. We unpack the full propellant roadmap and why every kilogram matters on a 9-month transit.",
+    coverImage: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=1200&q=80",
+    videoUrl: null,
+    author: "Dr. Marcus Webb",
+    tags: ["mars", "propulsion", "deep-dive"],
+    publishedAt: new Date("2026-04-02"),
+  },
+  {
+    slug: "watch-europa-clipper-transit",
+    title: "Watch: Europa Clipper's Journey to Jupiter",
+    category: "Video",
+    excerpt: "Animated visualization of the 5.5-year cruise from Earth to the icy moon Europa.",
+    body: "Our flight-dynamics team released a new animation showing the gravity-assist trajectory, including the Mars and Earth flybys that slingshot the spacecraft into Jupiter orbit. The video breaks down each maneuver down to the second.",
+    coverImage: "https://images.unsplash.com/photo-1462332420958-a05d1e002413?w=1200&q=80",
+    videoUrl: "https://www.youtube.com/watch?v=Mej_MvdlcPs",
+    author: "AstraMile Team",
+    tags: ["video", "europa", "trajectory"],
+    publishedAt: new Date("2026-03-25"),
+  },
+  {
+    slug: "life-aboard-the-station-week-in-orbit",
+    title: "Life Aboard the Station: A Week in Orbit",
+    category: "Crew Life",
+    excerpt: "Cmdr. Sarah Chen's personal log on training, science experiments, and the view that never gets old.",
+    body: "Every shift brings a new experiment, a new repair, and a new sunrise — sixteen of them, actually. Here's what a typical week looks like 400 kilometers up, from morning briefings to evening Earth-gazing.",
+    coverImage: "https://images.unsplash.com/photo-1559548331-f9cb98001426?w=1200&q=80",
+    videoUrl: null,
+    author: "Cmdr. Sarah Chen",
+    tags: ["crew", "iss", "journal"],
+    publishedAt: new Date("2026-03-18"),
+  },
+  {
+    slug: "building-an-ai-copilot-for-rockets",
+    title: "Building an AI Copilot for Rockets",
+    category: "Technology",
+    excerpt: "How machine learning is quietly becoming a core part of every launch.",
+    body: "From trajectory optimization to autonomous abort decisions, AI systems now make thousands of flight-critical calls every second. We look at the architecture, the training pipeline, and the redundancy required for human-rated hardware.",
+    coverImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80",
+    videoUrl: null,
+    author: "Dr. James Kowalski",
+    tags: ["ai", "avionics", "flight-computer"],
+    publishedAt: new Date("2026-03-05"),
+  },
+  {
+    slug: "raptor-3-full-duration-test-fire",
+    title: "Watch: Raptor 3 Full-Duration Test Fire",
+    category: "Video",
+    excerpt: "Footage from the 280-ton-thrust engine running for its full flight duration on the test stand.",
+    body: "The new Raptor 3 variant consolidates previously external plumbing into the engine body, dramatically reducing part count and weight. Watch the 200-second burn and see the diagnostics stream that followed.",
+    coverImage: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=1200&q=80",
+    videoUrl: "https://www.youtube.com/watch?v=4ZELF_kUeHo",
+    author: "AstraMile Engineering",
+    tags: ["video", "raptor", "engine-test"],
+    publishedAt: new Date("2026-02-18"),
+  },
+];
+
 const GALLERY = [
   { title: "Rocket Launch at Sunset", category: "Rockets", image: "https://images.unsplash.com/photo-1457364559154-aa2644600ebb?w=800&q=80", caption: "Twilight ascent over the pad", order: 0 },
   { title: "International Space Station", category: "Stations", image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&q=80", caption: null, order: 1 },
@@ -387,6 +473,12 @@ async function seedDemoContent() {
     await prisma.newsArticle.upsert({ where: { slug: n.slug }, create: n, update: n });
   }
   log(`news articles: ${NEWS.length}`);
+
+  // Blog
+  for (const b of BLOG) {
+    await prisma.blogPost.upsert({ where: { slug: b.slug }, create: b, update: b });
+  }
+  log(`blog posts: ${BLOG.length}`);
 
   // Gallery — no natural unique key, so seed only if empty
   const galleryCount = await prisma.galleryItem.count();

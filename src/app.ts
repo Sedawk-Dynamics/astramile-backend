@@ -14,6 +14,7 @@ import missionsRoutes from "./routes/missions.routes";
 import crewRoutes from "./routes/crew.routes";
 import launchesRoutes from "./routes/launches.routes";
 import newsRoutes from "./routes/news.routes";
+import blogRoutes from "./routes/blog.routes";
 import galleryRoutes from "./routes/gallery.routes";
 import technologyRoutes from "./routes/technology.routes";
 import aboutRoutes from "./routes/about.routes";
@@ -63,6 +64,7 @@ export function createApp() {
   app.use("/api/crew", crewRoutes);
   app.use("/api/launches", launchesRoutes);
   app.use("/api/news", newsRoutes);
+  app.use("/api/blog", blogRoutes);
   app.use("/api/gallery", galleryRoutes);
   app.use("/api/technology", technologyRoutes);
   app.use("/api/about", aboutRoutes);

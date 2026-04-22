@@ -111,9 +111,10 @@ Safe to put `seed:prod` in your release pipeline.
 | GET | /api/dashboard/summary | yes | counts + upcoming launches |
 | GET, POST, PATCH, DELETE | /api/rockets | mixed | GET public, writes auth |
 | GET, POST, PATCH, DELETE | /api/missions | mixed | |
-| GET, POST, PATCH, DELETE | /api/crew | mixed | |
+| GET, POST, PATCH, DELETE | /api/crew | mixed | "Our Team" members |
 | GET, POST, PATCH, DELETE | /api/launches | mixed | |
 | GET, POST, PATCH, DELETE | /api/news | mixed | |
+| GET, POST, PATCH, DELETE | /api/blog | mixed | Articles + YouTube/Vimeo/video URL |
 | GET, POST, PATCH, DELETE | /api/gallery | mixed | |
 | GET, POST, PATCH, DELETE | /api/technology | mixed | |
 | GET, PUT | /api/about | mixed | singleton |
