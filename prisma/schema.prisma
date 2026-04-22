@@ -1,0 +1,194 @@
+// AstraMile admin panel — Prisma schema
+// Postgres + Prisma Client. Run `npm run prisma:migrate` after editing.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  EDITOR
+}
+
+enum LaunchStatus {
+  UPCOMING
+  LIVE
+  SUCCESS
+  FAILURE
+  SCRUBBED
+}
+
+enum MissionStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role     @default(EDITOR)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Rocket {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  tagline     String?
+  description String
+  heightM     Float?
+  weightKg    Float?
+  payloadKg   Float?
+  successRate Float?
+  launches    Int      @default(0)
+  features    String[] @default([])
+  image       String?
+  order       Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  launchesList Launch[]
+}
+
+model Mission {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  name         String
+  summary      String
+  description  String
+  destination  String?
+  status       MissionStatus @default(PLANNED)
+  startDate    DateTime?
+  endDate      DateTime?
+  image        String?
+  order        Int           @default(0)
+  isPublished  Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  launches     Launch[]
+  crewMembers  CrewMember[]  @relation("MissionCrew")
+}
+
+model CrewMember {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  role        String
+  bio         String
+  nationality String?
+  photo       String?
+  order       Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  missions    Mission[] @relation("MissionCrew")
+}
+
+model Launch {
+  id           String       @id @default(cuid())
+  slug         String       @unique
+  name         String
+  description  String?
+  scheduledAt  DateTime
+  launchSite   String?
+  status       LaunchStatus @default(UPCOMING)
+  streamUrl    String?
+  image        String?
+  rocketId     String?
+  missionId    String?
+  order        Int          @default(0)
+  isPublished  Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  rocket       Rocket?      @relation(fields: [rocketId], references: [id], onDelete: SetNull)
+  mission      Mission?     @relation(fields: [missionId], references: [id], onDelete: SetNull)
+}
+
+model NewsArticle {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  category    String
+  excerpt     String
+  body        String
+  coverImage  String?
+  publishedAt DateTime @default(now())
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GalleryItem {
+  id          String   @id @default(cuid())
+  title       String
+  caption     String?
+  image       String
+  category    String?
+  order       Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Technology {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  icon        String?
+  metric      String?
+  metricLabel String?
+  image       String?
+  order       Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Singleton for the About page (only one row, key = "default")
+model AboutContent {
+  key          String   @id @default("default")
+  headline     String
+  body         String
+  mission      String?
+  vision       String?
+  heroImage    String?
+  stats        Json     @default("[]")
+  updatedAt    DateTime @updatedAt
+}
+
+// Hero / homepage stats row (success rate, missions, countries, etc.)
+model SiteStat {
+  id        String   @id @default(cuid())
+  label     String
+  value     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Contact form inbox
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
