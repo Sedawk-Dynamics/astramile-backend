@@ -172,16 +172,6 @@ model AboutContent {
   updatedAt    DateTime @updatedAt
 }
 
-// Hero / homepage stats row (success rate, missions, countries, etc.)
-model SiteStat {
-  id        String   @id @default(cuid())
-  label     String
-  value     String
-  order     Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 // Contact form inbox
 model ContactSubmission {
   id        String   @id @default(cuid())
