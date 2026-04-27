@@ -263,6 +263,8 @@ const CREW = [
   { slug: "james-kowalski", name: "Dr. James Kowalski", role: "Science Officer", nationality: "United States", bio: "Astrobiology researcher studying Mars habitability. Led breakthrough ISS experiments on microgravity biology.", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80", order: 3 },
   { slug: "elena-volkov", name: "Capt. Elena Volkov", role: "Pilot", nationality: "Russia", bio: "Veteran shuttle pilot. Orbital docking maneuver expert. Trained 50+ next-generation astronauts for deep space.", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80", order: 4 },
   { slug: "kenji-tanaka", name: "Dr. Kenji Tanaka", role: "Medical Officer", nationality: "Japan", bio: "Space medicine specialist for long-duration crew health. Pioneer in developing telemedicine protocols from orbit.", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80", order: 5 },
+  { slug: "carlos-reyes", name: "Dr. Carlos Reyes", role: "Robotics Engineer", nationality: "Brazil", bio: "Designs manipulator arms and EVA assistive robots. Led teleoperation trials on the lunar surface and is building the autonomy stack for Dragonfly.", photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80", order: 6 },
+  { slug: "yuki-sato", name: "Capt. Yuki Sato", role: "Spacecraft Systems Lead", nationality: "Japan", bio: "Avionics and life-support integration specialist. Flew two long-duration missions aboard the ISS and led the software-flight-rules group for Gateway.", photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80", order: 7 },
 ];
 
 const LAUNCHES: Array<{
@@ -283,6 +285,8 @@ const LAUNCHES: Array<{
   { slug: "chandrayaan-4", name: "Chandrayaan-4", description: "Lunar sample return from the south pole", scheduledAt: new Date("2026-10-10T06:00:00Z"), launchSite: "Satish Dhawan Space Centre", status: LaunchStatus.UPCOMING, image: "https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=600&q=80", rocketSlug: "gslv-mk-iii", order: 3 },
   { slug: "mars-express-ii", name: "Mars Express II", description: "Mars orbit insertion for relay communications", scheduledAt: new Date("2026-12-01T12:00:00Z"), launchSite: "Kourou, French Guiana", status: LaunchStatus.UPCOMING, image: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=600&q=80", rocketSlug: "ariane-5", order: 4 },
   { slug: "axiom-station-alpha", name: "Axiom Station Alpha", description: "Commercial station module deployment", scheduledAt: new Date("2027-02-15T10:00:00Z"), launchSite: "Cape Canaveral, FL", status: LaunchStatus.UPCOMING, image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&q=80", rocketSlug: "starship", order: 5 },
+  { slug: "starship-ift-9", name: "Starship IFT-9", description: "Full-duration orbital demonstration with payload integration test", scheduledAt: new Date("2025-10-13T13:00:00Z"), launchSite: "Starbase, Boca Chica, TX", status: LaunchStatus.SUCCESS, image: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=600&q=80", rocketSlug: "starship", order: 6 },
+  { slug: "gaganyaan-crew-pathfinder", name: "Gaganyaan Crew Pathfinder", description: "First crewed Indian orbital flight — 3-day mission", scheduledAt: new Date("2027-04-12T08:30:00Z"), launchSite: "Satish Dhawan Space Centre", status: LaunchStatus.UPCOMING, image: "https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=600&q=80", rocketSlug: "gslv-mk-iii", order: 7 },
 ];
 
 const NEWS = [
@@ -381,6 +385,18 @@ const BLOG: Array<{
     tags: ["video", "raptor", "engine-test"],
     publishedAt: new Date("2026-02-18"),
   },
+  {
+    slug: "designing-habitats-for-lunar-south-pole",
+    title: "Designing Habitats for the Lunar South Pole",
+    category: "Engineering",
+    excerpt: "Permanent shadow, lethal temperature swings, and sintered regolith walls — a first look at our next-gen surface habitat.",
+    body: "The south pole offers water ice and near-continuous solar power on high ridges, but also 100 K surface shadows and micrometeorite flux. We walk through the current habitat concept: inflatable pressure shell, regolith-3D-printed overburden, and a power-beaming architecture that cuts cable mass by 70%.",
+    coverImage: "https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=1200&q=80",
+    videoUrl: null,
+    author: "Lt. Aisha Patel",
+    tags: ["moon", "habitat", "engineering"],
+    publishedAt: new Date("2026-02-03"),
+  },
 ];
 
 const GALLERY = [
@@ -389,15 +405,10 @@ const GALLERY = [
   { title: "Earth from Orbit", category: "Planets", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80", caption: null, order: 2 },
   { title: "Astronaut in Deep Space", category: "Astronauts", image: "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=600&q=80", caption: null, order: 3 },
   { title: "Mars Surface Panorama", category: "Planets", image: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=600&q=80", caption: null, order: 4 },
-  { title: "Satellite Deployment", category: "Stations", image: "https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=600&q=80", caption: null, order: 5 },
-  { title: "Nebula Deep Field", category: "Deep Space", image: "https://images.unsplash.com/photo-1462332420958-a05d1e002413?w=800&q=80", caption: null, order: 6 },
-  { title: "Lunar Surface", category: "Planets", image: "https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=600&q=80", caption: null, order: 7 },
-  { title: "Rocket Engine Test Fire", category: "Rockets", image: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=600&q=80", caption: null, order: 8 },
-  { title: "Starship on Pad", category: "Rockets", image: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=600&q=80", caption: null, order: 9 },
-  { title: "Solar Corona", category: "Deep Space", image: "https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?w=600&q=80", caption: null, order: 10 },
-  { title: "Spacewalk EVA", category: "Astronauts", image: "https://images.unsplash.com/photo-1559548331-f9cb98001426?w=600&q=80", caption: null, order: 11 },
-  { title: "Mission Commander Portrait", category: "Astronauts", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80", caption: null, order: 12 },
-  { title: "Payload Specialist", category: "Astronauts", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80", caption: null, order: 13 },
+  { title: "Nebula Deep Field", category: "Deep Space", image: "https://images.unsplash.com/photo-1462332420958-a05d1e002413?w=800&q=80", caption: null, order: 5 },
+  { title: "Lunar Surface", category: "Planets", image: "https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=600&q=80", caption: null, order: 6 },
+  { title: "Starship on Pad", category: "Rockets", image: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=600&q=80", caption: null, order: 7 },
+  { title: "Spacewalk EVA", category: "Astronauts", image: "https://images.unsplash.com/photo-1559548331-f9cb98001426?w=600&q=80", caption: null, order: 8 },
 ];
 
 const TECHNOLOGY = [
@@ -421,12 +432,6 @@ const ABOUT = {
   vision:
     "Looking ahead, our roadmap includes crewed lunar missions, Mars cargo delivery, and ultimately establishing the first permanent human settlement beyond Earth.",
   heroImage: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1600&q=80",
-  stats: [
-    { label: "Missions Completed", value: "150+" },
-    { label: "Satellites Launched", value: "320+" },
-    { label: "Countries Served", value: "45" },
-    { label: "Experiments", value: "1200+" },
-  ],
 };
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -480,11 +485,16 @@ async function seedDemoContent() {
   }
   log(`blog posts: ${BLOG.length}`);
 
-  // Gallery — no natural unique key, so seed only if empty
+  // Gallery — no natural unique key. Seed when empty; when SEED_FORCE=true,
+  // wipe and reseed so the seed count always matches what's in this file.
   const galleryCount = await prisma.galleryItem.count();
   if (galleryCount === 0) {
     await prisma.galleryItem.createMany({ data: GALLERY });
     log(`gallery items: ${GALLERY.length}`);
+  } else if (FORCE) {
+    await prisma.galleryItem.deleteMany({});
+    await prisma.galleryItem.createMany({ data: GALLERY });
+    log(`gallery items: replaced ${galleryCount} existing rows with ${GALLERY.length}`);
   } else {
     log(`gallery already has ${galleryCount} items — skipping demo rows`);
   }

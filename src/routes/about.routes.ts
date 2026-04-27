@@ -12,9 +12,6 @@ const upsertSchema = z.object({
   mission: z.string().nullable().optional(),
   vision: z.string().nullable().optional(),
   heroImage: z.string().nullable().optional(),
-  stats: z
-    .array(z.object({ label: z.string(), value: z.string() }))
-    .optional(),
 });
 
 router.get(
@@ -29,7 +26,6 @@ router.get(
         mission: null,
         vision: null,
         heroImage: null,
-        stats: [],
         updatedAt: null,
       },
     );
@@ -43,8 +39,8 @@ router.put(
     const data = upsertSchema.parse(req.body);
     const row = await prisma.aboutContent.upsert({
       where: { key: "default" },
-      create: { key: "default", ...data, stats: data.stats ?? [] },
-      update: { ...data, stats: data.stats ?? [] },
+      create: { key: "default", ...data },
+      update: { ...data },
     });
     res.json(row);
   }),

@@ -185,7 +185,6 @@ model AboutContent {
   mission      String?
   vision       String?
   heroImage    String?
-  stats        Json     @default("[]")
   updatedAt    DateTime @updatedAt
 }
 
