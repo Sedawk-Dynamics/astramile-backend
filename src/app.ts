@@ -21,6 +21,10 @@ import aboutRoutes from "./routes/about.routes";
 import contactRoutes from "./routes/contact.routes";
 import dashboardRoutes from "./routes/dashboard.routes";
 
+function normalizeOrigin(value: string): string {
+  return value.trim().replace(/\/+$/, "").toLowerCase();
+}
+
 export function createApp() {
   const app = express();
 
@@ -33,7 +37,8 @@ export function createApp() {
     cors({
       origin: (origin, cb) => {
         if (!origin) return cb(null, true);
-        if (env.CORS_ORIGIN.includes("*") || env.CORS_ORIGIN.includes(origin)) {
+        const normalizedOrigin = normalizeOrigin(origin);
+        if (env.CORS_ORIGIN.includes("*") || env.CORS_ORIGIN.includes(normalizedOrigin)) {
           return cb(null, true);
         }
         cb(new Error(`CORS: origin ${origin} not allowed`));
