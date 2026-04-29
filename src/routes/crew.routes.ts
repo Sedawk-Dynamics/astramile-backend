@@ -8,6 +8,7 @@ const createSchema = z.object({
   bio: z.string().min(1),
   nationality: z.string().nullable().optional(),
   photo: z.string().nullable().optional(),
+  category: z.enum(["PROMOTER", "TEAM"]).optional(),
   order: z.number().int().optional(),
   isPublished: z.boolean().optional(),
 });

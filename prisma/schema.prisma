@@ -30,6 +30,11 @@ enum MissionStatus {
   CANCELLED
 }
 
+enum TeamCategory {
+  PROMOTER
+  TEAM
+}
+
 model Admin {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -83,19 +88,20 @@ model Mission {
 }
 
 model CrewMember {
-  id          String   @id @default(cuid())
-  slug        String   @unique
+  id          String       @id @default(cuid())
+  slug        String       @unique
   name        String
   role        String
   bio         String
   nationality String?
   photo       String?
-  order       Int      @default(0)
-  isPublished Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  category    TeamCategory @default(TEAM)
+  order       Int          @default(0)
+  isPublished Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
-  missions    Mission[] @relation("MissionCrew")
+  missions    Mission[]    @relation("MissionCrew")
 }
 
 model Launch {
