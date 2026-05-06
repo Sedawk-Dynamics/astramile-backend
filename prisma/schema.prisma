@@ -52,10 +52,11 @@ model Rocket {
   name        String
   tagline     String?
   description String
-  heightM     Float?
-  weightKg    Float?
-  payloadKg   Float?
-  successRate Float?
+  heightM      Float?
+  weightKg     Float?
+  payloadLeoKg Float?
+  payloadTliKg Float?
+  successRate  Float?
   launches    Int      @default(0)
   features    String[] @default([])
   image       String?
